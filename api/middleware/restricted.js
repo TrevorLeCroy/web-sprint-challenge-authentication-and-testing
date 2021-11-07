@@ -15,12 +15,12 @@ module.exports = (req, res, next) => {
   */
   const token = req.headers.authorization;
   console.log(token);
-  if(!token) {
-    res.status(401).send('token required');
+  if(!token || token === '') {
+    res.status(401).json('token required');
   } else {
     jwt.verify(token, secrets.jwtSecret, (err, decoded) => {
       if(err) {
-        res.status(401).send('token invalid');
+        res.status(401).json('token invalid');
       } else {
         req.decodedToken = decoded;
         next();
