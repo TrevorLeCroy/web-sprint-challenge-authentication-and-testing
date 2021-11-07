@@ -7,6 +7,10 @@ const request = require('supertest');
 //   expect(true).toBe(true);
 // })
 
+/*
+  Error in connecting to the DB?
+*/
+
 beforeAll(async() => {
   await db.migrate.rollback();
   await db.migrate.latest();
