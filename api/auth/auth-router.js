@@ -68,8 +68,8 @@ router.post('/login', (req, res) => {
   */
     let {username, password} = req.body;
     
-    if(!username || !password) {
-      res.status(401).send('username and password required')
+    if(!username || !password || username === '' || password === '') {
+      res.status(401).json('username and password required')
     }
 
     model.findBy({username})
@@ -81,11 +81,11 @@ router.post('/login', (req, res) => {
             token
           })
         } else {
-          res.status(401).json({message: 'invalid credentials'})
+          res.status(401).json('invalid credentials');
         }
       })
       .catch(error => {
-        res.status(500).send(`Error: ${error}`);
+        res.status(500).json(`Error: ${error}`);
       });
 });
 
